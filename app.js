@@ -12,6 +12,8 @@ const customerRoutes = require('./routes/route'); // Ensure the correct path
 
 // Load environment variables
 require("dotenv/config");
+console.log("customerRoutes" , customerRoutes);
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
