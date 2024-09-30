@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from eduport.webestica.com/admin-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 09:17:06 GMT -->
+
+<head>
+	<title>Eduport- LMS, Education and Course Theme</title>
+
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Eduport- LMS, Education and Course Theme">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="vendor/apexcharts/css/apexcharts.css">
+	<link rel="stylesheet" type="text/css" href="vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+
+	<!-- Theme CSS -->
+	<link id="style-switch" rel="stylesheet" type="text/css" href="css/style.css">
+
+
+	<style>
+		.card-link {
+			text-decoration: none;
+			/* Remove underline from link */
+		}
+
+		.card-link .card {
+			transition: transform 0.2s;
+			/* Add transition for hover effect */
+		}
+
+		.card-link:hover .card {
+			transform: scale(1.05);
+			/* Slightly increase the size on hover */
+		}
+
+		.image-card {
+			padding: 0;
+			/* Remove padding to ensure image takes full space */
+		}
+
+		.image-card .card-img {
+			width: 96%;
+			/* Make image take full width of the container */
+			height: auto;
+			/* Maintain aspect ratio */
+			border-radius: 0.5rem;
+			/* Optional: Add some border radius */
+		}
+
+		.card-img {
+			width: 100%;
+			/* Make image take full width of the container */
+			height: max-content;
+			/* Maintain aspect ratio */
+			border-radius: 0.5rem;
+			/* Optional: Add some border radius */
+		}
+	</style>
+
+</head>
+
+<body>
+
+
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+
+		<!-- Sidebar START -->
+		<%- include('includes/Sidebar.ejs')%>
+			<!-- Sidebar END -->
+
+			<!-- Top bar START -->
+			<!-- Top bar END -->
+			<!-- Page content START -->
+			<div class="page-content">
+
+				<!-- top bar location -->
+				<%- include('includes/topbar.ejs')%>
+
+					<!-- Page main content START -->
+					<div class="page-content-wrapper border">
+						<!-- Title -->
+						<div class="row">
+							<div class="col-12 mb-3">
+								<h1 class="h3 mb-2 mb-sm-0">Top Deals</h1>
+							</div>
+						</div>
+						<!-- Counter boxes START -->
+						<div class="row g-3 mb-6">
+							<%for (let i=0 ; i < categories.length ; i++) { %>
+								<!-- Counter item -->
+								<div class="col-md-6 col-xxl-3">
+									<a href="/sub-category-page?categoryId=<%= categories[i]._id %>" class="card-link">
+										<div class="card card-body p-4 h-1 00 image-card">
+											<img src="<%=categories[i].image %>" alt="<%= categories[i].slug %>"
+												class="card-img">
+										</div>
+									</a>
+								</div>
+								<% } %>
+						</div>
+
+						<!-- Page main content END -->
+					</div>
+			</div>
+			<!-- Page content END -->
+
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+	<!-- Back to top -->
+	<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+	<!-- Bootstrap JS -->
+	<script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Vendors -->
+	<script src="vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+	<script src="vendor/apexcharts/js/apexcharts.min.js"></script>
+	<script src="vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
+
+
+	<!-- Template Functions -->
+	<script src="js/cart.js"></script>
+	<script src="assets/js/functions.js"></script>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            let user = "<%= user %>";
+            console.log("userrrrrrrrrrr",user)
+            if (user) {
+                // User is not logged in, clear local storage
+                localStorage.removeItem('cart');
+            }
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from eduport.webestica.com/admin-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 09:17:13 GMT -->
+
+</html>

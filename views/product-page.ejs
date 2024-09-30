@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Eduport- LMS, Education and Course Theme</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Eduport- LMS, Education and Course Theme">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="vendor/apexcharts/css/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+    <link id="style-switch" rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        .main-para-container {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container.inner-dataaaaa {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .main-para-container h1 {
+            color: #333;
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-para-container .card {
+            width: calc(33.333% - 20px);
+            /* Three cards per row with some margin */
+            margin: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .main-para-container .card {
+                width: calc(50% - 20px);
+                /* Two cards per row on tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-para-container .card {
+                width: 100%;
+                /* One card per row on small screens */
+                margin: 10px 0;
+            }
+        }
+
+        .main-para-container .card:hover {
+            transform: scale(1.05);
+        }
+
+        .main-para-container .card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .main-para-container .card-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .main-para-container .card h2 {
+            color: #333;
+            margin: 0;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background: #0779e4;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: #005bb5;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .quantity button {
+            padding: 10px;
+            font-size: 18px;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quantity button:hover {
+            background: #ccc;
+        }
+
+        .quantity input {
+            width: 50px;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <%- include('includes/Sidebar.ejs') %>
+        <div class="main-para-container">
+            <main>
+                <div class="page-content">
+                    <!-- Topbar -->
+                    <%- include('includes/topbar.ejs') %>
+                        <!-- Topbar end -->
+                        <div class="container inner-dataaaaa">
+                            <h1>Products</h1>
+                            <% for (let i=0; i < product.length; i++) { %>
+                                <div class="card" id="product-<%= product[i]._id %>">
+                                    <div class="card-content">
+                                        <h2>
+                                            <%= product[i].name %>
+                                        </h2>
+                                        <img src="<%= product[i].image %>" alt="<%= product[i].name %>"
+                                            onclick="navigateToProduct('<%= product[i]._id %>')">
+                                        <span><b>Rs.<%= product[i].price %></b></span>
+                                        <div id="cart-buttons-<%= product[i]._id %>">
+                                            <button class="button"
+                                                onclick="addToCart('<%= product[i]._id %>', '<%= product[i].name %>' ,'<%= product[i].price %>')">Add
+                                                to Cart</button>
+                                        </div>
+                                        <% if(user !=null){ %>
+                                            <a href="/checkout?productId=<%= product[i]._id %>" class="button">Buy Now</a>
+                                            <% }%>
+                                                <% if(user==null){ %>
+                                                    <a href="/sign-in%>" class="button">Buy Now</a>
+                                                    <% }%>
+                                    </div>
+                                </div>
+                                <% } %>
+                        </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Back to top -->
+        <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+        <script src="vendor/apexcharts/js/apexcharts.min.js"></script>
+        <script src="vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
+        <script src="assets/js/functions.js"></script>
+        <script src="js/cart.js"></script>
+</body>
+
+</html>

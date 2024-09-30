@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Eduport - LMS, Education and Course Theme</title>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Eduport- LMS, Education and Course Theme">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="vendor/choices/css/choices.min.css">
+    <!-- Theme CSS -->
+    <link id="style-switch" rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Header START -->
+    <%- include('includes/Sidebar.ejs') %>
+    <!-- Header END -->
+    
+
+    <main id="main" class="main">
+        <div class="page-content">
+            <!-- Page Banner START -->
+            <%- include('includes/topbar.ejs') %>
+
+            <!-- End Page Title -->
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Table with stripped rows -->
+                                <table class="table datatable" id="category-table-body">
+                                    <thead>
+                                        <tr>
+                                            <th><b>order ID</b></th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>status</th>
+                                            <!-- <th>Delete</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% function formatDate(dateString) { %>
+                                            <% const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }; %>
+                                            <% return new Date(dateString).toLocaleDateString('en-US', options); %>
+                                        <% } %>
+
+                                        <% for (let i = 0; i < customer_transaction.length; i++) { %>
+                                            <tr>
+                                                <td>
+                                                    <%= customer_transaction[i].order_id %>
+                                                </td>
+                                                <td>
+                                                    Rs.<%= customer_transaction[i].amount %>
+                                                </td>
+                                                <td>
+                                                    <%= formatDate(customer_transaction[i].createdAt) %>
+                                                </td>
+                                                <td>
+                                                    <% if(customer_transaction[i].status == "Pending") {%>
+                                                        <span class="text-danger"> <%= customer_transaction[i].status %></span>
+                                                    <% } else { %>
+                                                        <span class="text-success"> <%= customer_transaction[i].status %></span>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+                                <!-- Pagination Controls -->
+                                <% if (totalPages > 1) { %>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center">
+                                            <% if (page > 1) { %>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=<%= page - 1 %>" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                            <% for (let i = 1; i <= totalPages; i++) { %>
+                                                <li class="page-item <%= i === page ? 'active' : '' %>">
+                                                    <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                                                </li>
+                                            <% } %>
+                                            <% if (page < totalPages) { %>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=<%= page + 1 %>" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            <% } %>
+                                        </ul>
+                                    </nav>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page content END -->
+            <%- include('includes/footer.ejs') %>
+            <!-- Footer END -->
+        </div>
+    </main><!-- End #main -->
+    <!-- back to top -->
+    <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Vendors -->
+    <script src="vendor/choices/js/choices.min.js"></script>
+    <!-- Template Functions -->
+    <script src="assets/js/functions.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Eduport- LMS, Education and Course Theme</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Eduport- LMS, Education and Course Theme">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="vendor/choices/css/choices.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+    <link id="style-switch" rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body>
+    <main>
+        <!-- side bar empty -->
+      
+        <%- include('includes/topbar.ejs') %>
+        <!-- <div class="page-content"> -->
+         
+            <div class="page-content-wrapper border">
+                <div class="row mb-3">
+                    <div class="col-12 d-sm-flex justify-content-between align-items-center">
+                        <h1 class="h3 mb-2 mb-sm-0">Add product</h1>
+                    </div>
+                </div>
+	
+                <div class="pagetitle">
+		
+                    <nav>
+                      <ol class="breadcrumb">
+                
+                        <li class="breadcrumb-item"><a href="/product-page?categoryId=<%=categoryId%>"><-BACK</a></li>
+                    
+                      </ol>
+                    </nav>
+                  </div><!-- End Page Title -->
+
+                  <div class="card-body">
+                <form id="add-product-form" class="row g-4" action="/add-product" method="post" >
+                    <div class="col-md-6">
+                        <input type="text" name="name" class="form-control" placeholder="Name" id="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="slug" class="form-control" placeholder="Slug" id="slug" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="price" class="form-control" placeholder="Price" id="price" required>
+                    </div>
+                    <div>
+                        <input type="text" name="categoryId" value="<%= categoryId %>" class="form-control" placeholder="categoryId" id="categoryId" hidden>
+                    </div>
+                    <div class="d-sm-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                  </div>
+
+                	
+            </div>
+        </div>
+    </main>
+    <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+    <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/choices/js/choices.min.js"></script>
+    <script src="vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#add-product-form').submit(function (event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+
+                var formData = $(this).serialize(); // Serialize the form data
+
+                $.ajax({
+                    url: '/add-product',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        toastr.success(response.message);
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 400) {
+                            toastr.error(xhr.responseJSON.message);
+                        } else {
+                            toastr.error('An error occurred while adding the product.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

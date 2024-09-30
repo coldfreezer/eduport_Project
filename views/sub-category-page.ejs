@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Eduport- LMS, Education and Course Theme</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Eduport- LMS, Education and Course Theme">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="vendor/apexcharts/css/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+
+    <!-- Theme CSS -->
+    <link id="style-switch" rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        .main-para-container {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container.inner-dataaaaa {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-para-container h1 {
+            color: #333;
+        }
+
+        .main-para-container .card {
+            display: inline-block;
+            width: 300px;
+            margin: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .main-para-container .card:hover {
+            transform: scale(1.05);
+        }
+
+        .main-para-container .card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .main-para-container .card-content {
+            padding: 15px;
+        }
+
+        .main-para-container .card h2 {
+            color: #333;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- sidebar -->
+    <%- include('includes/Sidebar.ejs')%>
+        <!-- ---------- -->
+
+        <div class="main-para-container">
+            <main>
+                <div class="page-content">
+
+                    <%- include('includes/topbar.ejs')%>
+                        <div class="container inner-dataaaaa">
+                            <h1>Subcategories</h1>
+
+                            <%for (let i=0 ; i < subCategory.length ; i++) { %>
+
+                                <div class="card" id="subcategory2">
+                                    <a href="/product-page?subcategoryId=<%= subCategory[i]._id %>">
+                                        <div class="card-content">
+                                            <h2>
+                                                <%= subCategory[i].name %>
+                                            </h2>
+                                        </div>
+                                        <img src="<%= subCategory[i].image %>" alt="Subcategory 2">
+                                    </a>
+                                </div>
+                                <% } %>
+                                    <!-- Add more subcategories as needed -->
+                        </div>
+                </div>
+            </main>
+        </div>
+        <!-- Back to top -->
+        <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Vendors -->
+        <script src="vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+        <script src="vendor/apexcharts/js/apexcharts.min.js"></script>
+        <script src="vendor/overlay-scrollbar/js/OverlayScrollbars.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <!-- Template Functions -->
+        <script src="assets/js/functions.js"></script>
+        <script src="js/cart.js"></script>
+
+</body>
+
+</html>
